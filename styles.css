@@ -103,6 +103,18 @@ body.light-mode-editor-active .inline-title {
   color: #1A1A1A;
 }
 
+/* ---- Editor-only font size override ----
+   Only applies when --lme-editor-font-size is set (via the plugin's
+   settings or keyboard shortcut). Sidebar, tabs, settings, command
+   palette — all unaffected. */
+.markdown-source-view {
+  --font-text-size: var(--lme-editor-font-size, var(--font-text-size));
+}
+.markdown-preview-view,
+.markdown-reading-view {
+  --font-text-size: var(--lme-editor-font-size, var(--font-text-size));
+}
+
 /* ---- Ribbon icon active state ---- */
 .side-dock-ribbon-action.is-active {
   color: var(--text-accent);
