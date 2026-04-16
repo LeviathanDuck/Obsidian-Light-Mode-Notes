@@ -10,7 +10,7 @@
   "keywords": [
     "obsidian-plugin"
   ],
-  "author": "Leviathan Duck (Leftcoast Media House Inc.)",
+  "author": "Leviathan Duck from Leftcoast Media House Inc.",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.11.0",
