@@ -1,0 +1,23 @@
+{
+  "name": "light-mode-editor",
+  "version": "0.1.0",
+  "description": "Toggle just the editor and reader pane into light mode while keeping the surrounding UI in dark mode.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production"
+  },
+  "keywords": [
+    "obsidian-plugin"
+  ],
+  "author": "Leviathan Duck (Leftcoast Media House Inc.)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.0",
+    "obsidian": "^1.4.11",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
+}

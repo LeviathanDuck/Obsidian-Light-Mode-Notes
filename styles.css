@@ -1,0 +1,109 @@
+/* Light Mode Editor — flips the document surface to light mode while
+   keeping the surrounding UI (sidebar, tabs, settings, etc.) untouched.
+   Activated via the body class `light-mode-editor-active`. */
+
+/* ---- Editor (Live Preview / Source) ---- */
+body.light-mode-editor-active .markdown-source-view {
+  --background-primary: #FFFFFF;
+  --background-secondary: #F7F7F7;
+  --text-normal: #1A1A1A;
+  --text-muted: #888888;
+  --text-faint: #AAAAAA;
+  --text-accent: #2563EB;
+  --text-selection: rgba(37, 99, 235, 0.20);
+  --interactive-accent: #2563EB;
+  --background-modifier-border: #E5E5E5;
+  --code-normal: #1E40AF;
+  --code-background: #F3F4F6;
+  --link-color: #2563EB;
+  --link-color-hover: #1D4ED8;
+  --bold-color: #1A1A1A;
+  --italic-color: #1A1A1A;
+  --h1-color: #1A1A1A;
+  --h2-color: #1A1A1A;
+  --h3-color: #1A1A1A;
+  --h4-color: #1A1A1A;
+  --h5-color: #1A1A1A;
+  --h6-color: #1A1A1A;
+  --tag-color: #6B7280;
+  --tag-background: #F3F4F6;
+  --list-marker-color: #9CA3AF;
+  --blockquote-color: #4B5563;
+  --text-highlight-bg: #FEF3C7;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+}
+
+/* Ensure the CM6 editor content area gets the light background */
+body.light-mode-editor-active .markdown-source-view .cm-editor,
+body.light-mode-editor-active .markdown-source-view .cm-scroller,
+body.light-mode-editor-active .markdown-source-view .cm-content {
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  caret-color: #1A1A1A;
+}
+
+/* Active line highlight in light mode */
+body.light-mode-editor-active .markdown-source-view .cm-activeLine {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Selection in light mode editor */
+body.light-mode-editor-active .markdown-source-view .cm-selectionBackground {
+  background-color: rgba(37, 99, 235, 0.20) !important;
+}
+
+/* Gutters */
+body.light-mode-editor-active .markdown-source-view .cm-gutters {
+  background-color: var(--background-primary);
+  border-right-color: var(--background-modifier-border);
+  color: var(--text-faint);
+}
+
+/* ---- Reader (Preview / Reading mode) ---- */
+body.light-mode-editor-active .markdown-preview-view,
+body.light-mode-editor-active .markdown-reading-view {
+  --background-primary: #FFFFFF;
+  --background-secondary: #F7F7F7;
+  --text-normal: #1A1A1A;
+  --text-muted: #888888;
+  --text-faint: #AAAAAA;
+  --text-accent: #2563EB;
+  --interactive-accent: #2563EB;
+  --background-modifier-border: #E5E5E5;
+  --code-normal: #1E40AF;
+  --code-background: #F3F4F6;
+  --link-color: #2563EB;
+  --link-color-hover: #1D4ED8;
+  --bold-color: #1A1A1A;
+  --italic-color: #1A1A1A;
+  --h1-color: #1A1A1A;
+  --h2-color: #1A1A1A;
+  --h3-color: #1A1A1A;
+  --h4-color: #1A1A1A;
+  --h5-color: #1A1A1A;
+  --h6-color: #1A1A1A;
+  --tag-color: #6B7280;
+  --tag-background: #F3F4F6;
+  --list-marker-color: #9CA3AF;
+  --blockquote-color: #4B5563;
+  --text-highlight-bg: #FEF3C7;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+}
+
+/* Reading mode selection */
+body.light-mode-editor-active .markdown-preview-view ::selection,
+body.light-mode-editor-active .markdown-reading-view ::selection {
+  background-color: rgba(37, 99, 235, 0.20);
+}
+
+/* Inline title (note title shown at top of editor) */
+body.light-mode-editor-active .inline-title {
+  color: #1A1A1A;
+}
+
+/* ---- Ribbon icon active state ---- */
+.side-dock-ribbon-action.is-active {
+  color: var(--text-accent);
+}
