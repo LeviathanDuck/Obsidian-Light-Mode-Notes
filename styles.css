@@ -104,36 +104,21 @@ body.light-mode-editor-active .inline-title {
 }
 
 /* ---- Editor-only font size override ----
-   Targets text elements directly (not containers) so padding and
-   margins don't scale. Covers body text, headings, and inline title.
-   Only applies when --lme-editor-font-size is set via the plugin. */
-.markdown-source-view .cm-line,
-.markdown-source-view .cm-line .cm-header {
-  font-size: var(--lme-editor-font-size) !important;
-}
-.markdown-source-view .inline-title {
+   Targets body-text elements only (not headers, not containers) so
+   padding doesn't scale and headings keep their proportional sizing.
+   Only applies when --lme-editor-font-size is set via the plugin.
+   When the var is unset, the declarations become invalid and the
+   browser ignores them (CSS spec for undefined custom properties). */
+.markdown-source-view .cm-line:not(.HyperMD-header) {
   font-size: var(--lme-editor-font-size) !important;
 }
 .markdown-preview-view p,
 .markdown-preview-view li,
-.markdown-preview-view h1,
-.markdown-preview-view h2,
-.markdown-preview-view h3,
-.markdown-preview-view h4,
-.markdown-preview-view h5,
-.markdown-preview-view h6,
 .markdown-preview-view blockquote,
 .markdown-preview-view td,
 .markdown-preview-view th,
-.markdown-preview-view .inline-title,
 .markdown-reading-view p,
 .markdown-reading-view li,
-.markdown-reading-view h1,
-.markdown-reading-view h2,
-.markdown-reading-view h3,
-.markdown-reading-view h4,
-.markdown-reading-view h5,
-.markdown-reading-view h6,
 .markdown-reading-view blockquote {
   font-size: var(--lme-editor-font-size) !important;
 }
