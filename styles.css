@@ -104,22 +104,17 @@ body.light-mode-editor-active .inline-title {
 }
 
 /* ---- Editor-only font size override ----
-   Targets body-text elements only (not headers, not containers) so
-   padding doesn't scale and headings keep their proportional sizing.
-   Only applies when --lme-editor-font-size is set via the plugin.
-   When the var is unset, the declarations become invalid and the
-   browser ignores them (CSS spec for undefined custom properties). */
-.markdown-source-view .cm-line:not(.HyperMD-header) {
+   Sets font-size on the innermost text container (.cm-content for
+   editor, .markdown-preview-view for reader). Everything inside —
+   body text, headers, code, links — scales proportionally. Padding
+   lives on outer containers (.cm-editor, .cm-scroller) and is
+   unaffected. When --lme-editor-font-size is unset, the declaration
+   is invalid and ignored (CSS spec for undefined custom properties). */
+.markdown-source-view .cm-content {
   font-size: var(--lme-editor-font-size) !important;
 }
-.markdown-preview-view p,
-.markdown-preview-view li,
-.markdown-preview-view blockquote,
-.markdown-preview-view td,
-.markdown-preview-view th,
-.markdown-reading-view p,
-.markdown-reading-view li,
-.markdown-reading-view blockquote {
+.markdown-preview-view,
+.markdown-reading-view {
   font-size: var(--lme-editor-font-size) !important;
 }
 
