@@ -160,24 +160,13 @@ class LightModeSettingTab extends PluginSettingTab {
 
     // ---- Author block ----
     const authorBlock = containerEl.createDiv({ cls: "lme-author-block" });
-    const authorLink = authorBlock.createEl("a", {
+    const nameDiv = authorBlock.createEl("div", { cls: "lme-author-name" });
+    const nameLink = nameDiv.createEl("a", {
+      text: "Leviathan Duck",
       href: "https://github.com/LeviathanDuck",
     });
-    authorLink.setAttr("target", "_blank");
-    authorLink.setAttr("rel", "noopener");
-    authorLink.createEl("img", {
-      attr: {
-        src: this.app.vault.adapter.getResourcePath(
-          ".obsidian/plugins/light-mode-editor/assets/LeviathanDuck.png"
-        ),
-        alt: "LeviathanDuck",
-      },
-      cls: "lme-author-avatar",
-    });
-    authorBlock.createEl("div", {
-      cls: "lme-author-name",
-      text: "Leviathan Duck",
-    });
+    nameLink.setAttr("target", "_blank");
+    nameLink.setAttr("rel", "noopener");
     authorBlock.createEl("div", {
       cls: "lme-author-meta",
       text: "Leftcoast Media House Inc.",
