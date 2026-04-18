@@ -103,19 +103,54 @@ body.light-mode-editor-active .inline-title {
   color: #1A1A1A;
 }
 
-/* ---- Editor-only font size override ----
-   Sets font-size on the innermost text container (.cm-content for
-   editor, .markdown-preview-view for reader). Everything inside —
-   body text, headers, code, links — scales proportionally. Padding
-   lives on outer containers (.cm-editor, .cm-scroller) and is
-   unaffected. When --lme-editor-font-size is unset, the declaration
-   is invalid and ignored (CSS spec for undefined custom properties). */
-.markdown-source-view .cm-content {
-  font-size: var(--lme-editor-font-size) !important;
+/* ---- Typographic system scale (iA Writer / Ulysses model) ----
+   Scoped to body.lme-font-size-active — only applies when the user has
+   engaged the slider. When idle, the active theme is untouched.
+
+   One base size scales the whole system:
+   - font-size on .cm-content / preview container drives body text
+   - --h1-size..--h6-size and --inline-title-size are overridden in em,
+     so headers scale with the container and keep their hierarchy ratio
+   - padding overridden in em so padding grows with text
+   - --file-line-width / --line-width overridden in ch so characters-
+     per-line stays ~constant as font-size changes
+   - line-height is left alone; Obsidian's --line-height-normal is
+     unitless and scales correctly on its own
+
+   Selectors target standard Obsidian class names and standard CSS
+   custom properties so the override works across themes. */
+
+body.lme-font-size-active {
+  --file-line-width: 66ch;
+  --line-width: 66ch;
 }
-.markdown-preview-view,
-.markdown-reading-view {
+
+body.lme-font-size-active .markdown-source-view .cm-content {
   font-size: var(--lme-editor-font-size) !important;
+  --h1-size: 2em;
+  --h2-size: 1.6em;
+  --h3-size: 1.3em;
+  --h4-size: 1.1em;
+  --h5-size: 1em;
+  --h6-size: 0.9em;
+  --inline-title-size: 2em;
+  padding: 1em 1.5em !important;
+}
+
+body.lme-font-size-active .markdown-preview-view,
+body.lme-font-size-active .markdown-reading-view {
+  font-size: var(--lme-editor-font-size) !important;
+  --h1-size: 2em;
+  --h2-size: 1.6em;
+  --h3-size: 1.3em;
+  --h4-size: 1.1em;
+  --h5-size: 1em;
+  --h6-size: 0.9em;
+  --inline-title-size: 2em;
+}
+
+body.lme-font-size-active .markdown-preview-view .markdown-preview-sizer {
+  padding: 1em 1.5em !important;
 }
 
 /* ---- Ribbon icon active state ---- */

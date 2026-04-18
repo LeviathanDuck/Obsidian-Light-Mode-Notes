@@ -1,6 +1,6 @@
 {
   "name": "light-mode-editor",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Toggle just the editor and reader pane into light mode while keeping the surrounding UI in dark mode.",
   "main": "main.js",
   "scripts": {

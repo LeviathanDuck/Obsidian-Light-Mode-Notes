@@ -94,11 +94,13 @@ export default class LightModeEditorPlugin extends Plugin {
   applyEditorFontSize() {
     if (this.settings.editorFontSize == null) {
       document.body.style.removeProperty("--lme-editor-font-size");
+      document.body.classList.remove("lme-font-size-active");
     } else {
       document.body.style.setProperty(
         "--lme-editor-font-size",
         `${this.settings.editorFontSize}px`
       );
+      document.body.classList.add("lme-font-size-active");
     }
   }
 
@@ -113,6 +115,7 @@ export default class LightModeEditorPlugin extends Plugin {
 
   onunload() {
     document.body.classList.remove("light-mode-editor-active");
+    document.body.classList.remove("lme-font-size-active");
     document.body.style.removeProperty("--lme-editor-font-size");
   }
 }
