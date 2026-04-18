@@ -157,5 +157,37 @@ class LightModeSettingTab extends PluginSettingTab {
           this.display();
         })
       );
+
+    // ---- Author block ----
+    const authorBlock = containerEl.createDiv({ cls: "lme-author-block" });
+    const authorLink = authorBlock.createEl("a", {
+      href: "https://github.com/LeviathanDuck",
+    });
+    authorLink.setAttr("target", "_blank");
+    authorLink.setAttr("rel", "noopener");
+    authorLink.createEl("img", {
+      attr: {
+        src: this.app.vault.adapter.getResourcePath(
+          ".obsidian/plugins/light-mode-editor/assets/LeviathanDuck.png"
+        ),
+        alt: "LeviathanDuck",
+      },
+      cls: "lme-author-avatar",
+    });
+    authorBlock.createEl("div", {
+      cls: "lme-author-name",
+      text: "Leviathan Duck",
+    });
+    authorBlock.createEl("div", {
+      cls: "lme-author-meta",
+      text: "Leftcoast Media House Inc.",
+    });
+    const moreP = authorBlock.createEl("div", { cls: "lme-author-meta" });
+    const moreLink = moreP.createEl("a", {
+      text: "More Obsidian plugins & themes",
+      href: "https://github.com/LeviathanDuck?tab=repositories",
+    });
+    moreLink.setAttr("target", "_blank");
+    moreLink.setAttr("rel", "noopener");
   }
 }
