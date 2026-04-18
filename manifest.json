@@ -1,10 +1,10 @@
 {
   "id": "light-mode-editor",
   "name": "Light Mode Editor",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "minAppVersion": "1.4.0",
   "description": "Toggle just the editor and reader pane into light mode while keeping the surrounding UI in dark mode.",
   "author": "Leviathan Duck from Leftcoast Media House Inc.",
-  "authorUrl": "",
+  "authorUrl": "https://github.com/LeviathanDuck",
   "isDesktopOnly": false
 }

@@ -123,6 +123,25 @@ body.light-mode-editor-active .inline-title {
   color: var(--text-accent);
 }
 
+/* ---- Beta notice ---- */
+.lme-beta-notice {
+  border: 1px solid var(--text-warning, #c0a030);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  background-color: color-mix(in srgb, var(--text-warning, #c0a030) 10%, var(--background-secondary));
+}
+.lme-beta-notice strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-warning, #c0a030);
+}
+.lme-beta-notice p {
+  margin: 0;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
 /* ---- Author block ---- */
 .lme-author-block {
   text-align: center;

@@ -129,6 +129,21 @@ class LightModeSettingTab extends PluginSettingTab {
     const { containerEl } = this;
     containerEl.empty();
 
+    // ---- Beta notice ----
+    const betaNotice = containerEl.createDiv({ cls: "lme-beta-notice" });
+    betaNotice.createEl("strong", { text: "🧪 Public beta" });
+    const betaBody = betaNotice.createEl("p");
+    betaBody.appendText(
+      "This plugin is in active testing. If you hit something unexpected, please "
+    );
+    const betaLink = betaBody.createEl("a", {
+      text: "submit an issue on GitHub",
+      href: "https://github.com/LeviathanDuck/Obsidian-Light-Mode-Notes/issues",
+    });
+    betaLink.setAttr("target", "_blank");
+    betaLink.setAttr("rel", "noopener");
+    betaBody.appendText(" — thanks for helping make it better.");
+
     const current = this.plugin.settings.editorFontSize;
     const label = current == null ? "Default (Obsidian setting)" : `${current}px`;
 

@@ -1,5 +1,7 @@
 # Light Mode Editor
 
+> 🧪 **Public beta.** This plugin is in active testing. If you hit something unexpected, please [submit an issue on GitHub](https://github.com/LeviathanDuck/Obsidian-Light-Mode-Notes/issues) — thanks for helping make it better.
+
 Toggle just the editor and reader pane into light mode while keeping the surrounding UI in dark mode.
 
 *A project of the Leviathan Duck from Leftcoast Media House Inc.*
