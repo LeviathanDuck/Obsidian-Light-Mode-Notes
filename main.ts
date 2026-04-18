@@ -1,11 +1,13 @@
-import { App, Plugin, PluginSettingTab, Setting } from "obsidian";
+import { App, MarkdownView, Platform, Plugin, PluginSettingTab, Setting } from "obsidian";
 
 interface LightModeSettings {
   editorFontSize: number | null; // null = use Obsidian default
+  showFontSizeButtons: boolean;
 }
 
 const DEFAULT_SETTINGS: LightModeSettings = {
   editorFontSize: null,
+  showFontSizeButtons: true,
 };
 
 const STEP = 1; // px per increment
@@ -13,6 +15,7 @@ const STEP = 1; // px per increment
 export default class LightModeEditorPlugin extends Plugin {
   private active = false;
   private ribbonIcon: HTMLElement | null = null;
+  private buttonsByView: Map<MarkdownView, HTMLElement[]> = new Map();
   settings: LightModeSettings = { ...DEFAULT_SETTINGS };
 
   async onload() {
@@ -51,6 +54,11 @@ export default class LightModeEditorPlugin extends Plugin {
 
     this.addSettingTab(new LightModeSettingTab(this.app, this));
     this.applyEditorFontSize();
+
+    this.attachToAllViews();
+    this.registerEvent(
+      this.app.workspace.on("layout-change", () => this.attachToAllViews())
+    );
   }
 
   private toggleLightMode() {
@@ -85,10 +93,56 @@ export default class LightModeEditorPlugin extends Plugin {
     void this.saveSettings();
   }
 
-  private resetEditorFontSize() {
+  resetEditorFontSize() {
     this.settings.editorFontSize = null;
     this.applyEditorFontSize();
     void this.saveSettings();
+  }
+
+  attachToAllViews() {
+    if (Platform.isMobile || !this.settings.showFontSizeButtons) return;
+    this.app.workspace.getLeavesOfType("markdown").forEach(leaf => {
+      const view = leaf.view;
+      if (view instanceof MarkdownView && !this.buttonsByView.has(view)) {
+        this.attachButtons(view);
+      }
+    });
+  }
+
+  detachFromAllViews() {
+    Array.from(this.buttonsByView.keys()).forEach(view => this.detachButtons(view));
+  }
+
+  private attachButtons(view: MarkdownView) {
+    const viewActions = view.containerEl.querySelector(".view-actions");
+    if (!viewActions) return;
+
+    const modeToggle = viewActions.lastElementChild;
+
+    const dec = view.addAction("minus", "Decrease font size", () =>
+      this.changeEditorFontSize(-STEP)
+    );
+    const reset = view.addAction("rotate-ccw", "Reset font size", () =>
+      this.resetEditorFontSize()
+    );
+    const inc = view.addAction("plus", "Increase font size", () =>
+      this.changeEditorFontSize(STEP)
+    );
+
+    if (modeToggle && modeToggle.parentElement === viewActions) {
+      viewActions.insertBefore(dec, modeToggle);
+      viewActions.insertBefore(reset, modeToggle);
+      viewActions.insertBefore(inc, modeToggle);
+    }
+
+    this.buttonsByView.set(view, [dec, reset, inc]);
+  }
+
+  private detachButtons(view: MarkdownView) {
+    const handles = this.buttonsByView.get(view);
+    if (!handles) return;
+    handles.forEach(el => el.remove());
+    this.buttonsByView.delete(view);
   }
 
   applyEditorFontSize() {
@@ -114,6 +168,7 @@ export default class LightModeEditorPlugin extends Plugin {
   }
 
   onunload() {
+    this.detachFromAllViews();
     document.body.classList.remove("light-mode-editor-active");
     document.body.classList.remove("lme-font-size-active");
     document.body.style.removeProperty("--lme-editor-font-size");
@@ -174,6 +229,25 @@ class LightModeSettingTab extends PluginSettingTab {
           void this.plugin.saveSettings();
           this.display();
         })
+      );
+
+    new Setting(containerEl)
+      .setName("Show font-size buttons in editor")
+      .setDesc(
+        "Adds small buttons (decrease, reset, increase) to the top-right of every note's editor and reader view. Desktop only."
+      )
+      .addToggle(toggle =>
+        toggle
+          .setValue(this.plugin.settings.showFontSizeButtons)
+          .onChange(value => {
+            this.plugin.settings.showFontSizeButtons = value;
+            void this.plugin.saveSettings();
+            if (value) {
+              this.plugin.attachToAllViews();
+            } else {
+              this.plugin.detachFromAllViews();
+            }
+          })
       );
 
     // ---- Author block ----
