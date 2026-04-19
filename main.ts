@@ -100,7 +100,7 @@ export default class LightModeEditorPlugin extends Plugin {
   }
 
   attachToAllViews() {
-    if (Platform.isMobile || !this.settings.showFontSizeButtons) return;
+    if (Platform.isPhone || !this.settings.showFontSizeButtons) return;
     this.app.workspace.getLeavesOfType("markdown").forEach(leaf => {
       const view = leaf.view;
       if (view instanceof MarkdownView && !this.buttonsByView.has(view)) {
@@ -236,7 +236,7 @@ class LightModeSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Show font-size buttons in editor")
       .setDesc(
-        "Adds small buttons (decrease, reset, increase) to the top-right of every note's editor and reader view. Desktop only."
+        "Adds small buttons (decrease, reset, increase) to the top-right of every note's editor and reader view. Hidden on phones; shown on desktop and tablet/iPad."
       )
       .addToggle(toggle =>
         toggle
