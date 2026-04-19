@@ -117,25 +117,27 @@ export default class LightModeEditorPlugin extends Plugin {
     const viewActions = view.containerEl.querySelector(".view-actions");
     if (!viewActions) return;
 
-    const modeToggle = viewActions.lastElementChild;
-
     const dec = view.addAction("minus", "Decrease font size", () =>
       this.changeEditorFontSize(-STEP)
-    );
-    const reset = view.addAction("rotate-ccw", "Reset font size", () =>
-      this.resetEditorFontSize()
     );
     const inc = view.addAction("plus", "Increase font size", () =>
       this.changeEditorFontSize(STEP)
     );
+    const reset = view.addAction("rotate-ccw", "Reset font size", () =>
+      this.resetEditorFontSize()
+    );
+
+    const modeToggle = viewActions.querySelector<HTMLElement>(
+      '[aria-label^="Current view"]'
+    );
 
     if (modeToggle && modeToggle.parentElement === viewActions) {
       viewActions.insertBefore(dec, modeToggle);
-      viewActions.insertBefore(reset, modeToggle);
       viewActions.insertBefore(inc, modeToggle);
+      viewActions.insertBefore(reset, modeToggle);
     }
 
-    this.buttonsByView.set(view, [dec, reset, inc]);
+    this.buttonsByView.set(view, [dec, inc, reset]);
   }
 
   private detachButtons(view: MarkdownView) {
