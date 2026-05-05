@@ -148,7 +148,7 @@ export default class LightModeEditorPlugin extends Plugin {
   }
 
   applyEditorFontSize() {
-    if (this.settings.editorFontSize == null) {
+    if (Platform.isPhone || this.settings.editorFontSize == null) {
       document.body.style.removeProperty("--lme-editor-font-size");
       document.body.classList.remove("lme-font-size-active");
     } else {
